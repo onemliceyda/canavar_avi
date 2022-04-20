@@ -4,6 +4,7 @@ new Vue({
         player_heal: 100,
         monster_heal: 100,
         game_is_on: false,
+        logs:[]
     },
 
     methods: {
@@ -13,11 +14,13 @@ new Vue({
         attack: function () {
             var point = Math.ceil(Math.random() * 15);
             this.monster_heal -= point;
+            this.add_to_log({turn:"Player",text:" OYUNCU ATAĞI : "+  point })
             this.monster_attack();
         },
         special_attack: function () {
             var point = Math.ceil(Math.random() * 25);
             this.monster_heal -= point;
+            this.add_to_log({turn:"Player",text:" ÖZEL OYUNCU ATAĞI : "+point})
             this.monster_attack();
 
 
@@ -25,17 +28,23 @@ new Vue({
         heal_up: function () {
             var point = Math.ceil(Math.random() * 20);
             this.player_heal += point;
+            this.add_to_log({turn:"Player",text:" İLK YARDIM :  "+ point })
             this.monster_attack();
 
 
         },
         give_up: function () {
             this.player_heal = 0;
+            this.add_to_log({turn:"Player",text:" OYUNCU PES ETTİ!!!" })
 
         },
         monster_attack: function () {
             var point = Math.ceil(Math.random() * 10);
             this.player_heal -= point;
+            this.add_to_log({turn:"Player",text:" CANAVAR ATAĞI: "+point})
+        },
+        add_to_log:function(log){
+            this.logs.push(log)
         }
     },
     watch: {
@@ -61,9 +70,6 @@ new Vue({
                     this.player_heal=100;
                     this.monster_heal=100;
                 }
-            }
-            else if (value >= 100) {
-                this.monster_heal = 100;
             }
 
         }
