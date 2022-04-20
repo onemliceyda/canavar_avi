@@ -11,34 +11,30 @@ new Vue({
             this.game_is_on = true;
         },
         attack: function () {
-            var point = Math.ceil(Math.random() * 10);
+            var point = Math.ceil(Math.random() * 15);
             this.monster_heal -= point;
             this.monster_attack();
-            console.log(this.monster_heal)
-            console.log("Plyer", this.player_heal)
         },
         special_attack: function () {
             var point = Math.ceil(Math.random() * 25);
             this.monster_heal -= point;
             this.monster_attack();
-            console.log(this.monster_heal)
-            console.log("Plyer", this.player_heal)
+           
 
         },
         heal_up: function () {
             var point = Math.ceil(Math.random() * 20);
             this.player_heal += point;
             this.monster_attack();
-            console.log(this.monster_heal)
-            console.log("Plyer", this.player_heal)
+         
 
         },
         give_up: function () {
            this.player_heal=0;
-           console.log("p: ",this.player_heal)
+          
         },
         monster_attack: function () {
-            var point = Math.ceil(Math.random() * 15);
+            var point = Math.ceil(Math.random() * 10);
             this.player_heal -= point;
         }
     }
